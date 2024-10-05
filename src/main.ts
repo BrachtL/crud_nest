@@ -13,6 +13,7 @@ async function bootstrap() {
   // Optionally, you can specify specific origins:
   // app.enableCors({ origin: 'http://localhost:4200' }); 
 
+  console.log('JWT_SECRET:', process.env.JWT_SECRET); // Log the JWT_SECRET to see if it's undefined
   await app.listen(3000);
 }
 

@@ -8,10 +8,13 @@ export class User {
   @Column({ length: 100 })
   name: string;
 
+  @Column({ length: 255 })
+  email: string;
+
   @Column({ type: 'text' })
   password_hash: string;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: 'date' })
   birthdate: Date;
 
   @Column({ default: false })
