@@ -1,19 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
+import cookieParser from 'cookie-parser'; 
 
 dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
-  // Enable CORS for all origins
-  app.enableCors(); // This will allow requests from all origins
 
-  // Optionally, you can specify specific origins:
-  // app.enableCors({ origin: 'http://localhost:4200' }); 
+  app.enableCors({
+    origin: 'http://localhost:4200',
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+  });
 
-  console.log('JWT_SECRET:', process.env.JWT_SECRET); // Log the JWT_SECRET to see if it's undefined
+  app.use(cookieParser());
+
+  console.log('JWT_SECRET:', process.env.JWT_SECRET);
   await app.listen(3000);
 }
 
